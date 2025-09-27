@@ -1,23 +1,52 @@
-# Student Performance Analysis (Multiple Linear Regration)
+# Student Performance Prediction
 
 ## Overview
-This repository contains an analysis of the **Student Performance Dataset**, a synthetic dataset from Kaggle designed to explore the factors influencing student academic performance. The dataset includes **10,000 student records** with various predictors and a performance index.
+This repository contains a Jupyter Notebook for predicting student performance using a dataset from Kaggle. The notebook performs data loading, exploration, preprocessing, and trains a Linear Regression model to predict the `Performance Index` based on features like study hours and previous scores, achieving an R² score of ~98.84%.
 
-## Dataset Description
-The dataset consists of the following variables:
+## Dataset
+- **Source**: `/kaggle/input/student-performance-dataset/StudentPerformance.csv` (10,000 entries)
+- **Features**:
+  - `Hours Studied` (numerical, 1-9)
+  - `Previous Scores` (numerical, 40-100)
+  - `Extracurricular Activities` (Yes/No, encoded as 1/0)
+  - `Sleep Hours` (numerical, 4-9)
+  - `Sample Question Papers Practiced` (numerical, 0-9)
+- **Target**: `Performance Index` (numerical, regression task, 10-100)
+- **Preprocessing**: Encode categorical column; no missing values.
 
-- **Hours Studied**: Total hours spent studying.
-- **Previous Scores**: Scores obtained in previous tests.
-- **Extracurricular Activities**: Participation in extracurricular activities (**Yes/No**).
-- **Sleep Hours**: Average daily sleep hours.
-- **Sample Question Papers Practiced**: Number of sample papers practiced.
-- **Performance Index** (**Target Variable**): A score from **10 to 100** representing academic performance.
+## Approach
+1. **Data Loading & Exploration**:
+   - Load with Pandas; view head, describe, info.
+   - Check for nulls (none).
+   - Visualize correlation heatmap.
 
-## Analysis
-The notebook in this repository explores the relationships between these factors and the **Performance Index** using data visualization and statistical techniques. It includes:
+2. **Preprocessing**:
+   - Map 'Yes' → 1, 'No' → 0 for Extracurricular Activities.
+   - Split into features (X) and target (y).
+   - Train-test split (80/20).
 
-- **Data cleaning and preprocessing**
-- **Exploratory data analysis (EDA)**
-- **Data visualization using Matplotlib and Seaborn**
-- **Regression analysis to identify key predictors of student performance**
+3. **Modeling & Evaluation**:
+   - Model: LinearRegression (default parameters).
+   - Train on training data; predict on test.
+   - Metrics: Mean Squared Error (MSE), R-squared (R²).
+   - Outputs: Coefficients, Intercept, MSE (~4.23), R² (~98.84%).
+
+## Requirements
+- Python 3.10+
+- Libraries: `numpy`, `pandas`, `seaborn`, `matplotlib`, `scikit-learn`
+
+Install via:
+```bash
+pip install numpy pandas seaborn matplotlib scikit-learn
+```
+
+## Results
+- MSE: ~4.23
+- R² Score: ~98.84%
+- Coefficients: [2.85, 1.02, 0.65, 0.48, 0.19]
+- Intercept: ~-34.05
+
+## Notes
+- Optimized for Kaggle environment; adjust paths for local use.
+- High R² indicates strong linear relationships; potential for more models or tuning.
 
